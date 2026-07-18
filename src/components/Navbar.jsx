@@ -25,7 +25,7 @@ export default function Navbar() {
           className="font-serif text-xl font-semibold text-charcoal tracking-tight"
           onClick={() => setOpen(false)}
         >
-          Dr. Sema Azab
+          Psk. Sema Azab
         </Link>
 
         {/* Desktop nav — hidden below md, hamburger takes over */}

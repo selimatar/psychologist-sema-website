@@ -68,7 +68,7 @@ export default function Home() {
           />
           <div>
             <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">
-              About Dr. Azab
+              About Psk. Azab
             </p>
             <h2 className="font-serif text-2xl md:text-3xl font-medium text-ink mb-4">
               Someone in your corner, not across a desk
@@ -119,7 +119,7 @@ export default function Home() {
             "You don't need to have the right words, or even know what's wrong. You just need to
             show up as you are — we'll figure out the rest together."
           </p>
-          <p className="m-0 text-sm text-sage-dark font-semibold">&mdash; Dr. Sema Azab</p>
+          <p className="m-0 text-sm text-sage-dark font-semibold">&mdash; Psk. Sema Azab</p>
         </div>
       </section>
 

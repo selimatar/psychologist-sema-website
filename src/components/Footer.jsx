@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-10 md:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
           <div>
-            <p className="font-serif text-lg font-semibold text-charcoal mb-3">Dr. Sema Azap</p>
+            <p className="font-serif text-lg font-semibold text-charcoal mb-3">Psk. Sema AZAB</p>
             <p className="text-sm font-medium text-sage mb-2">Licensed Clinical Psychologist</p>
             <p className="text-sm text-body max-w-xs">
               Online psychotherapy for anxiety, stress, and life&apos;s harder transitions.
@@ -61,7 +61,7 @@ export default function Footer() {
 
         <div className="border-t border-charcoal/10 mt-10 pt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-[13.5px] text-muted m-0">
-            &copy; {new Date().getFullYear()} Dr. Sema Azap, Psychology Practice
+            &copy; {new Date().getFullYear()} Psk. Sema AZAB, Psychology Practice
           </p>
           <p className="text-[13px] text-muted m-0">
             If you are in crisis, please call 988 (Suicide &amp; Crisis Lifeline) or your local
