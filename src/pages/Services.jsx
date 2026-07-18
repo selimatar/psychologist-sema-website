@@ -1,6 +1,6 @@
 import ServiceCard from "../components/ServiceCard.jsx";
 import CtaBanner from "../components/CtaBanner.jsx";
-import { services, approachSteps } from "../data/content.js";
+import { services, approachSteps } from "../data/content.tr.js";
 
 export default function Services() {
   return (
@@ -8,14 +8,13 @@ export default function Services() {
       <section className="max-w-6xl mx-auto px-6 md:px-8 pt-20 pb-10 text-center">
         <div className="max-w-2xl mx-auto">
           <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">
-            Areas of Focus
+            Odak Alanları
           </p>
           <h1 className="font-serif text-3xl md:text-5xl font-medium text-ink mb-3">
-            Support for what you're navigating
+            Geçtiğiniz süreçte size destek olurum
           </h1>
           <p className="text-lg text-[#5B5850] m-0">
-            Every person's story is different — these are simply the places I most often help
-            people begin.
+            Her insanın hikayesi farklıdır; bunlar sadece en sık başladığım alanlar.
           </p>
         </div>
       </section>
@@ -32,14 +31,14 @@ export default function Services() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-14">
             <p className="text-sm tracking-wide uppercase text-sage-dark font-semibold mb-4">
-              Approach
+              Yaklaşım
             </p>
             <h2 className="font-serif text-3xl md:text-4xl font-medium text-ink mb-3">
-              What to expect, from the very first step
+              İlk adımdan itibaren ne bekleyebileceğiniz
             </h2>
             <p className="text-lg text-[#33452E] m-0">
-              Not knowing what therapy involves can be its own source of anxiety. Here's exactly
-              how we'd work together.
+              Terapi hakkında ne olacağını bilmemek kendi başına bir kaygı kaynağı olabilir.
+              İşte birlikte nasıl çalışacağımızın tam detayı.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
@@ -57,9 +56,9 @@ export default function Services() {
       </section>
 
       <CtaBanner
-        title="Not sure which area fits your situation?"
-        subtitle="That's exactly what the free consultation call is for."
-        buttonLabel="Book a Free Consultation"
+        title="Hangi alanın durumunuza daha uygun olduğunu merak ediyor musunuz?"
+        subtitle="İşte tam olarak ücretsiz görüşme çağrısının olduğu yer budur."
+        buttonLabel="Ücretsiz Görüşme Al"
       />
     </>
   );

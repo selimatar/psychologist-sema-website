@@ -2,10 +2,10 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 const links = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "Ana Sayfa" },
+  { to: "/about", label: "Hakkımda" },
+  { to: "/services", label: "Hizmetler" },
+  { to: "/contact", label: "İletişim" },
 ];
 
 // Active-link styling helper — NavLink gives us isActive for free
@@ -41,13 +41,13 @@ export default function Navbar() {
           to="/contact"
           className="hidden md:inline-block bg-terracotta text-white px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap shadow-[0_2px_10px_rgba(201,123,92,0.25)] hover:opacity-90 transition-opacity"
         >
-          Book a Consultation
+          Randevu Al
         </Link>
 
         {/* Hamburger button — pure Tailwind, no icon library */}
         <button
           className="md:hidden flex flex-col justify-center gap-1.5 w-8 h-8"
-          aria-label="Toggle menu"
+          aria-label="Menüyü aç/kapat"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
@@ -92,7 +92,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-3 bg-terracotta text-white text-center px-5 py-3 rounded-full text-sm font-medium"
           >
-            Book a Consultation
+            Randevu Al
           </Link>
         </nav>
       )}

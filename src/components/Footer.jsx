@@ -6,66 +6,65 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-10 md:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
           <div>
-            <p className="font-serif text-lg font-semibold text-charcoal mb-3">Psk. Sema AZAB</p>
-            <p className="text-sm font-medium text-sage mb-2">Licensed Clinical Psychologist</p>
+            <p className="font-serif text-lg font-semibold text-charcoal mb-3">Psk. Sema Azab</p>
+            <p className="text-sm font-medium text-sage mb-2">Lisanslı Klinik Psikolog</p>
             <p className="text-sm text-body max-w-xs">
-              Online psychotherapy for anxiety, stress, and life&apos;s harder transitions.
+              Kaygı, stres ve yaşamın zorlu geçişleri için çevrimiçi psikoterapi.
             </p>
           </div>
 
           <div>
             <p className="text-[13px] uppercase tracking-[0.06em] text-muted font-semibold mb-4">
-              Explore
+              Keşfet
             </p>
             <div className="flex flex-col gap-2.5">
               <Link to="/" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                Home
+                Ana Sayfa
               </Link>
               <Link to="/about" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                About
+                Hakkımda
               </Link>
               <Link to="/services" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                Services
+                Hizmetler
               </Link>
               <Link to="/contact" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                Contact
+                İletişim
               </Link>
             </div>
           </div>
 
           <div>
             <p className="text-[13px] uppercase tracking-[0.06em] text-muted font-semibold mb-4">
-              Get Started
+              Başlayın
             </p>
             <div className="flex flex-col gap-2.5">
               <Link to="/contact" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                Contact
+                İletişime Geçin
               </Link>
               <Link to="/contact" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                Book a Consultation
+                Ücretsiz Görüşme Talep Edin
               </Link>
             </div>
           </div>
 
           <div>
             <p className="text-[13px] uppercase tracking-[0.06em] text-muted font-semibold mb-4">
-              Practice Details
+              Uygulama Bilgileri
             </p>
             <div className="flex flex-col gap-2.5">
-              <p className="m-0 text-[14.5px] text-charcoal">Online sessions only</p>
-              <p className="m-0 text-[14.5px] text-charcoal">Private pay, superbill provided</p>
-              <p className="m-0 text-[14.5px] text-charcoal">Ph.D., Clinical Psychology</p>
+              <p className="m-0 text-[14.5px] text-charcoal">Yalnızca çevrimiçi seanslar</p>
+              <p className="m-0 text-[14.5px] text-charcoal">Özel ödeme, superbill sağlanır</p>
+              <p className="m-0 text-[14.5px] text-charcoal">Klinik Psikoloji</p>
             </div>
           </div>
         </div>
 
         <div className="border-t border-charcoal/10 mt-10 pt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-[13.5px] text-muted m-0">
-            &copy; {new Date().getFullYear()} Psk. Sema AZAB, Psychology Practice
+            &copy; {new Date().getFullYear()} Psk. Sema Azab, Psikoloji Muayenehanesi
           </p>
           <p className="text-[13px] text-muted m-0">
-            If you are in crisis, please call 988 (Suicide &amp; Crisis Lifeline) or your local
-            emergency number.
+            Bir kriz yaşıyorsanız, lütfen 112&apos;i veya bulunduğunuz bölgedeki acil yardım hattını arayın.
           </p>
         </div>
       </div>
