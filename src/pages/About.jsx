@@ -15,7 +15,7 @@ export default function About() {
               About
             </p>
             <h1 className="font-serif text-3xl md:text-5xl font-medium text-ink mb-2">
-              Dr. Sema Azap, Ph.D.
+              Dr. Sema Azab, Ph.D.
             </h1>
             <p className="text-[15.5px] text-sage font-medium mb-6">
               Licensed Clinical Psychologist &middot; 12+ years in practice
