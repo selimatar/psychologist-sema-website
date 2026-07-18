@@ -27,8 +27,8 @@ export default function Footer() {
               <Link to="/services" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
                 Hizmetler
               </Link>
-              <Link to="/contact" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
-                İletişim
+              <Link to="/contact#faq" className="text-[14.5px] text-charcoal hover:text-terracotta transition-colors">
+                SSS
               </Link>
             </div>
           </div>
@@ -52,9 +52,9 @@ export default function Footer() {
               Uygulama Bilgileri
             </p>
             <div className="flex flex-col gap-2.5">
-              <p className="m-0 text-[14.5px] text-charcoal">Yalnızca çevrimiçi seanslar</p>
-              <p className="m-0 text-[14.5px] text-charcoal">Özel ödeme, superbill sağlanır</p>
-              <p className="m-0 text-[14.5px] text-charcoal">Klinik Psikoloji</p>
+              <p className="m-0 text-[14.5px] text-charcoal">Sadece çevrimiçi seanslar</p>
+              <p className="m-0 text-[14.5px] text-charcoal">Özel ödeme, fatura (superbill) sağlanır</p>
+              <p className="m-0 text-[14.5px] text-charcoal">Doktora, Klinik Psikoloji</p>
             </div>
           </div>
         </div>

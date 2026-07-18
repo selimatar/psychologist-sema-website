@@ -24,18 +24,35 @@ export default function Contact() {
               Bize Ulaşın
             </p>
             <h1 className="font-serif text-3xl md:text-5xl font-medium text-ink mb-5">
-              İletişime geçmek çoğu zaman en zor kısımdır
+              İletişime geçmek genellikle en zor kısımdır
             </h1>
             <p className="text-lg text-body mb-7">
-              Aşağıya kısa bir not bırakın; bir iş günü içinde ücretsiz 15 dakikalık görüşme için
-              size dönüş yapacağım — herhangi bir taahhüt yok, sadece bunun doğru hissettirmesi
-              için bir fırsat.
+              Aşağıya kısa bir not bırakın, ücretsiz 15 dakikalık görüşmeyi ayarlamak için bir iş
+              günü içinde size dönüş yapacağım — herhangi bir taahhüt yok, sadece doğru olup
+              olmadığını görme fırsatı.
             </p>
+
+            <div className="bg-sand rounded-2xl p-7 mb-5">
+              <h3 className="font-serif text-lg font-semibold mb-4 text-ink">Sırada ne var</h3>
+              <div className="flex flex-col gap-4">
+                {[
+                  "Ücretsiz görüşmeniz için bir zaman onaylamak üzere bir iş günü içinde size dönüş yapacağım.",
+                  "Sizi buraya getiren şey hakkında biraz bilgi alabilmem için yaklaşık 15 dakika konuşacağız.",
+                  "Uygun bir eşleşme gibi hissettirirse, size uygun bir zamanda çevrimiçi olarak ilk tam seansınızı planlayacağız.",
+                ].map((line, i) => (
+                  <div key={line} className="flex gap-3">
+                    <p className="m-0 font-serif font-semibold text-terracotta flex-none w-5">{i + 1}</p>
+                    <p className="m-0 text-[15px] text-[#4E4B44]">{line}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="flex flex-col gap-4">
               {[
-                "Yalnızca güvenli video görüşmesi üzerinden çevrimiçi seanslar.",
+                "Sadece güvenli video görüşmesi üzerinden çevrimiçi seanslar.",
                 "Burada paylaştığınız her şey gizlidir ve yalnızca görüşmenizi ayarlamak için kullanılır.",
-                "Özel ödeme uygulaması; ağ dışı geri ödeme için superbill sağlanır.",
+                "Özel ödemeli muayenehane — ağ dışı geri ödeme için bir fatura (superbill) sağlanır.",
               ].map((line) => (
                 <div key={line} className="flex gap-3 items-start">
                   <span className="w-2 h-2 rounded-full bg-sage-light mt-2 flex-none" />
@@ -49,10 +66,9 @@ export default function Contact() {
             {submitted ? (
               <div className="bg-white rounded-2xl p-11 text-center border border-charcoal/10">
                 <p className="text-4xl mb-3">&#10003;</p>
-                <h3 className="font-serif text-xl mb-2 text-ink">Talebiniz alındı</h3>
+                <h3 className="font-serif text-xl mb-2 text-ink">Teşekkür ederim</h3>
                 <p className="text-[15.5px] text-[#5B5850] m-0 max-w-xs mx-auto">
-                  İletişime geçtiğiniz için teşekkür ederim. Bir iş günü içinde ücretsiz görüşme
-                  için sizinle iletişime geçeceğim.
+                  Mesajınız alındı. Bir iş günü içinde sizinle iletişime geçeceğim.
                 </p>
               </div>
             ) : (
@@ -79,7 +95,7 @@ export default function Contact() {
                   </Field>
                 </div>
 
-                <Field label="Ne konuda destek almak istersiniz?" optional>
+                <Field label="Hangi konuda destek almak istersiniz?" optional>
                   <select className="input-field" defaultValue="">
                     <option value="">Bir alan seçin (isteğe bağlı)</option>
                     <option value="anxiety">Kaygı</option>
@@ -92,18 +108,18 @@ export default function Contact() {
                   </select>
                 </Field>
 
-                <Field label="Size en iyi hangi saatlerde ulaşayım?" optional>
+                <Field label="Size ulaşmak için en uygun zamanlar" optional>
                   <input
                     type="text"
-                    placeholder="ör. hafta içi sabahları"
+                    placeholder="örn. hafta içi sabahları"
                     className="input-field"
                   />
                 </Field>
 
-                <Field label="Bilmemi istediğiniz bir şey var mı?" optional>
+                <Field label="Bilmemi istediğiniz başka bir şey var mı?" optional>
                   <textarea
                     rows={4}
-                    placeholder="İsterseniz çok az ya da çok fazla paylaşabilirsiniz"
+                    placeholder="İstediğiniz kadar az ya da çok paylaşabilirsiniz"
                     className="input-field resize-y"
                   />
                 </Field>

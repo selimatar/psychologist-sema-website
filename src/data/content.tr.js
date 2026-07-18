@@ -16,13 +16,13 @@ export const services = [
   },
   {
     title: "Yaşam Geçişleri",
-    desc: "Kariyer değişiklikleri, ilişki değişimleri, taşınma veya her tür yeni dönemde destek.",
+    desc: "Kariyer değişiklikleri, ilişki değişimleri, taşınma veya her türlü yeni dönem için destek.",
     tint: "bg-[#EAF0E5]",
     icon: "transitions",
   },
   {
     title: "Yas",
-    desc: "Kaybı kendi hızınızda, zaman çizelgesi olmadan işlemek için nazik ve acele etmeyen bir alan.",
+    desc: "Kaybı kendi hızınızda, zaman çizelgesi olmadan işlemek için nazik ve acelesiz bir alan.",
     tint: "bg-[#F3E7DE]",
     icon: "grief",
   },
@@ -34,7 +34,7 @@ export const services = [
   },
   {
     title: "Travma",
-    desc: "Kendinizi güvende hissettiğiniz bir hızda ilerleyen, asla aceleye getirilmeyen travma bilinci odaklı bakım.",
+    desc: "Kendinizi güvende hissettiğiniz bir hızda ilerleyen, asla aceleye getirilmeyen travma bilinçli bakım.",
     tint: "bg-[#F3E7DE]",
     icon: "trauma",
   },
@@ -54,12 +54,12 @@ export const approachSteps = [
   {
     num: "03",
     title: "Ritminizi bulmak",
-    desc: "Haftalık veya iki haftada bir seanslar; neyin gerçekten faydalı olduğuna göre birlikte ayarlanır.",
+    desc: "Gerçekten faydalı olana göre ayarlanan haftalık veya iki haftada bir seanslar.",
   },
   {
     num: "04",
     title: "Sürekli bakım",
-    desc: "İlerlemenin yanında yaklaşımı da düzenli olarak gözden geçirir ve gerektiğinde uyarlayırız.",
+    desc: "İlerlemeyi düzenli olarak kontrol eder ve gerektiğinde yaklaşımı ayarlarız.",
   },
 ];
 

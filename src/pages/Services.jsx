@@ -11,10 +11,11 @@ export default function Services() {
             Odak Alanları
           </p>
           <h1 className="font-serif text-3xl md:text-5xl font-medium text-ink mb-3">
-            Geçtiğiniz süreçte size destek olurum
+            Yaşadığınız süreçte yanınızdayım
           </h1>
           <p className="text-lg text-[#5B5850] m-0">
-            Her insanın hikayesi farklıdır; bunlar sadece en sık başladığım alanlar.
+            Her insanın hikâyesi farklıdır — bunlar sadece insanlara en sık başlangıç noktası
+            olarak yardımcı olduğum alanlar.
           </p>
         </div>
       </section>
@@ -34,11 +35,11 @@ export default function Services() {
               Yaklaşım
             </p>
             <h2 className="font-serif text-3xl md:text-4xl font-medium text-ink mb-3">
-              İlk adımdan itibaren ne bekleyebileceğiniz
+              İlk adımdan itibaren neler bekleyebileceğiniz
             </h2>
             <p className="text-lg text-[#33452E] m-0">
-              Terapi hakkında ne olacağını bilmemek kendi başına bir kaygı kaynağı olabilir.
-              İşte birlikte nasıl çalışacağımızın tam detayı.
+              Terapinin neyi kapsadığını bilmemek, başlı başına bir kaygı kaynağı olabilir.
+              Birlikte tam olarak nasıl çalışacağımız burada.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
@@ -56,9 +57,9 @@ export default function Services() {
       </section>
 
       <CtaBanner
-        title="Hangi alanın durumunuza daha uygun olduğunu merak ediyor musunuz?"
-        subtitle="İşte tam olarak ücretsiz görüşme çağrısının olduğu yer budur."
-        buttonLabel="Ücretsiz Görüşme Al"
+        title="Durumunuza hangi alanın uyduğundan emin değil misiniz?"
+        subtitle="Ücretsiz görüşme tam olarak bunun için var."
+        buttonLabel="Ücretsiz Görüşme Talep Et"
       />
     </>
   );

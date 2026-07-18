@@ -14,7 +14,7 @@ export default function Home() {
             Çevrimiçi Psikoterapi
           </p>
           <h1 className="font-serif text-4xl md:text-6xl leading-[1.15] font-medium text-ink mb-6">
-            Şu anda sizi ağırlaştıran şeylerle başa çıkmak için daha sakin bir alan
+            İçinizi ağırlaştıran şeyleri işlemek için daha sakin bir alan
           </h1>
           <p className="text-lg text-[#5B5850] max-w-md mb-9">
             Kaygı, stres ve yaşamın zorlu geçişleri için bireysel terapi — kendi hızınızda,
@@ -25,13 +25,13 @@ export default function Home() {
               to="/contact"
               className="bg-terracotta text-white px-8 py-4 rounded-full text-base font-medium shadow-[0_4px_16px_rgba(201,123,92,0.28)] hover:opacity-90 transition-opacity"
             >
-              Ücretsiz Görüşme Al
+              Ücretsiz Görüşme Talep Et
             </Link>
             <Link
               to="/services"
               className="px-7 py-4 rounded-full text-base font-medium border border-charcoal/20 hover:border-charcoal/40 transition-colors"
             >
-              Seansların nasıl işlediğini gör
+              Seanslar nasıl işliyor
             </Link>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function Home() {
             "Lisanslı Klinik Psikolog",
             "12+ Yıllık Deneyim",
             "Gizli ve Güvenli Seanslar",
-            "Çevrimiçi, Eyaletin Her Yerinden",
+            "Çevrimiçi, Ülkenin Her Yerinden",
           ].map((item) => (
             <p key={item} className="m-0 text-[14.5px] text-[#5B5850]">
               {item}
@@ -68,19 +68,19 @@ export default function Home() {
           />
           <div>
             <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">
-              Hakkımda
+              Psk. Azab Hakkında
             </p>
             <h2 className="font-serif text-2xl md:text-3xl font-medium text-ink mb-4">
-              Masanın karşısında değil, yanınızda duran bir destek
+              Karşınızda değil, yanınızda duran biri
             </h2>
             <p className="text-lg text-body max-w-xl mb-5">
-              Bu pratiği kurmaya başladım çünkü terapiyi daha çok klinik bir engel gibi değil,
-              gerçekten arkanızda duran biriyle yapılan bir konuşma gibi hissettirmek istedim.
-              Yaklaşımım bilişsel-davranışçı ve psikodinamik eğitimimi gerçek bir sabırla
-              birleştirir; başladığınız yer ne olursa olsun, ona uygun bir şekilde ilerler.
+              Bu muayenehaneyi, terapinin klinik bir engelden çok, gerçekten yanınızda olan
+              biriyle yapılan bir sohbet gibi hissettirmesini istediğim için kurdum. Yaklaşımım,
+              bilişsel-davranışçı ve psikodinamik eğitimi, nereden başlarsanız başlayın
+              gösterdiğim gerçek bir sabırla birleştiriyor.
             </p>
             <Link to="/about" className="text-[15.5px] font-semibold text-terracotta">
-              Arka planım ve yaklaşımım hakkında daha fazlasını oku &rarr;
+              Geçmişim hakkında daha fazlasını oku &rarr;
             </Link>
           </div>
         </div>
@@ -93,10 +93,11 @@ export default function Home() {
             Odak Alanları
           </p>
           <h2 className="font-serif text-3xl md:text-4xl font-medium text-ink mb-3">
-            Geçtiğiniz süreçte size destek olurum
+            Yaşadığınız süreçte yanınızdayım
           </h2>
           <p className="text-lg text-[#5B5850] m-0">
-            Her insanın hikayesi farklıdır; bunlar en sık başladığımız alanlar.
+            Her insanın hikâyesi farklıdır — bunlar sadece insanlara en sık başlangıç noktası
+            olarak yardımcı olduğum alanlar.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -115,7 +116,7 @@ export default function Home() {
       <section className="bg-sage-light px-6 md:px-8 py-24">
         <div className="max-w-2xl mx-auto text-center">
           <p className="font-serif italic text-2xl md:text-3xl leading-relaxed text-ink mb-5">
-            &quot;Doğru kelimeleri bulmak zorunda değilsin; hatta neyin yanlış olduğunu da bilmek zorunda değilsin. Sadece olduğun gibi görünmen yeterli — gerisini birlikte çözeriz.&quot;
+            &quot;Doğru kelimelere sahip olmanıza ya da neyin yanlış olduğunu bilmenize gerek yok. Sadece olduğunuz gibi gelmeniz yeterli — gerisini birlikte çözeceğiz.&quot;
           </p>
           <p className="m-0 text-sm text-sage-dark font-semibold">&mdash; Psk. Sema Azab</p>
         </div>
@@ -124,26 +125,26 @@ export default function Home() {
       {/* FAQ TEASER */}
       <section className="max-w-3xl mx-auto px-6 md:px-8 py-24 text-center">
         <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">
-          Logistik mi merak ediyorsunuz?
+          Pratik Detayları mı Merak Ediyorsunuz?
         </p>
         <h2 className="font-serif text-2xl md:text-3xl font-medium text-ink mb-4">
-          Ücretler, gizlilik ve seansların nasıl işlediği
+          Ücretler, gizlilik ve seansların işleyişi
         </h2>
         <p className="text-lg text-[#5B5850] mb-7">
-          İlk seansınızdan önce insanların en sık sorduğu sorular — açık ve net cevaplarla.
+          İnsanların ilk seanstan önce sorduğu ortak sorular — açık ve net yanıtlarla.
         </p>
         <Link
           to="/contact#faq"
           className="inline-block px-7 py-3.5 rounded-full text-[15.5px] font-medium border border-charcoal/20"
         >
-          SSS&apos;yi görüntüle &rarr;
+          SSS&apos;yi ziyaret et &rarr;
         </Link>
       </section>
 
       <CtaBanner
-        title="İletişime geçmek çoğu zaman en zor kısımdır"
-        subtitle="Ücretsiz 15 dakikalık bir görüşme, bunun doğru bir adım olup olmadığını görmek için düşük baskılı bir yol sağlar — herhangi bir taahhüt yok."
-        buttonLabel="Ücretsiz Görüşme Al"
+        title="İletişime geçmek genellikle en zor kısımdır"
+        subtitle="Ücretsiz 15 dakikalık görüşme, bunun sizin için doğru olup olmadığını görmenin baskısız bir yoludur — herhangi bir taahhüt gerektirmez."
+        buttonLabel="Ücretsiz Görüşme Talep Et"
       />
     </>
   );
