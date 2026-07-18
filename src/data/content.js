@@ -6,31 +6,37 @@ export const services = [
     title: "Anxiety",
     desc: "Practical tools and steady support for racing thoughts, worry, and the physical weight anxiety can bring.",
     tint: "bg-[#EAF0E5]",
+    icon: "anxiety",
   },
   {
     title: "Stress Management",
     desc: "Making sense of overwhelm and building sustainable ways to handle daily pressure.",
     tint: "bg-[#F3E7DE]",
+    icon: "stress",
   },
   {
     title: "Life Transitions",
     desc: "Support through career shifts, relationship changes, relocation, or new chapters of any kind.",
     tint: "bg-[#EAF0E5]",
+    icon: "transitions",
   },
   {
     title: "Grief",
     desc: "A gentle, unhurried space to process loss at your own pace, without a timeline.",
     tint: "bg-[#F3E7DE]",
+    icon: "grief",
   },
   {
     title: "Depression",
     desc: "Working together to understand low mood and rebuild a sense of momentum and meaning.",
     tint: "bg-[#EAF0E5]",
+    icon: "depression",
   },
   {
     title: "Trauma",
     desc: "Trauma-informed care that moves at a pace you feel safe with, never rushed.",
     tint: "bg-[#F3E7DE]",
+    icon: "trauma",
   },
 ];
 

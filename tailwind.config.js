@@ -7,7 +7,9 @@ export default {
       colors: {
         cream: "#FAF7F2",   // page background
         sand: "#F1ECE1",    // alternating section background
-        terracotta: "#C97B5C", // primary accent / CTA
+        terracotta: "#8B9AA5", // primary accent / CTA
+        // CTA banner color for consistent usage via `bg-cta-banner`
+        "cta-banner": "#5C6B52C1", // 76% opacity to match prototype
         sage: {
           light: "#A8C3A0",
           DEFAULT: "#7A9471",
