@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global resets that mirror the prototype's inline body styles */
+body {
+  @apply bg-cream text-charcoal antialiased;
+}
+
+::selection {
+  @apply bg-terracotta text-white;
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3.5 rounded-lg border border-charcoal/15 text-[15px] bg-cream font-sans;
+  }
+}
