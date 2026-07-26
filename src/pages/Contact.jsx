@@ -70,6 +70,18 @@ export default function Contact() {
                 <p className="text-[15.5px] text-[#5B5850] m-0 max-w-xs mx-auto">
                   Mesajınız alındı. Bir iş günü içinde sizinle iletişime geçeceğim.
                 </p>
+                <p className="text-[15.5px] text-[#5B5850] mt-4 mb-5 max-w-xs mx-auto">
+                  Rezervasyon onaylandığında size bilgi verilecektir. Şimdi lütfen bilgi formunu
+                  doldurunuz.
+                </p>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdH0Wwbe097talQ6YToA1W7gVrRe0p1XKBaQfzihDebDjYx5g/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-terracotta text-white px-8 py-3.5 rounded-full text-[15.5px] font-medium hover:opacity-90 transition-opacity"
+                >
+                  Bilgi Formunu Doldur
+                </a>
               </div>
             ) : (
               <form

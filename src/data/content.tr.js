@@ -42,24 +42,29 @@ export const services = [
 
 export const approachSteps = [
   {
-    num: "01",
-    title: "Ücretsiz görüşme",
-    desc: "Neler olduğunu paylaşmak ve sorularınızı sormak için kısa, 15 dakikalık bir görüşme.",
+    num: "1",
+    title: "İlk Adım",
+    desc: "İletişim formunu doldurarak ya da e-posta yoluyla bana ulaşırsınız.",
   },
   {
-    num: "02",
-    title: "İlk seans",
-    desc: "Hikâyenizi ve neyi umduğunuzu anlamak için zaman ayırırız.",
+    num: "2",
+    title: "Ön Görüşme",
+    desc: "15-20 dakikalık kısa bir görüşmeyle birbirimizi tanır, uygunluğu değerlendiririz.",
   },
   {
-    num: "03",
-    title: "Ritminizi bulmak",
-    desc: "Gerçekten faydalı olana göre ayarlanan haftalık veya iki haftada bir seanslar.",
+    num: "3",
+    title: "İlk Seans",
+    desc: "50 dakikalık ilk seansta sizi dinler, birlikte bir yol haritası çıkarırız.",
   },
   {
-    num: "04",
-    title: "Sürekli bakım",
-    desc: "İlerlemeyi düzenli olarak kontrol eder ve gerektiğinde yaklaşımı ayarlarız.",
+    num: "4",
+    title: "Gizlilik",
+    desc: "Paylaştığınız her şey gizli kalır; güven bu sürecin en önemli temelidir.",
+  },
+  {
+    num: "5",
+    title: "Süreklilik",
+    desc: "Haftalık ya da iki haftalık düzenli seanslarla, kendi hızınızda ilerleriz.",
   },
 ];
 

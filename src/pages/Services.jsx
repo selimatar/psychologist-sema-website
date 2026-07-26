@@ -28,28 +28,35 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="bg-sage-light px-6 md:px-8 py-24">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-14">
-            <p className="text-sm tracking-wide uppercase text-sage-dark font-semibold mb-4">
-              Yaklaşım
+      <section className="bg-sage-light/10 px-6 py-[88px]">
+        <div className="max-w-[820px] mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-sm tracking-wide uppercase text-muted font-semibold mb-3.5">
+              Nasıl İşliyor
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-medium text-ink mb-3">
-              İlk adımdan itibaren neler bekleyebileceğiniz
+            <h2 className="font-serif text-3xl font-semibold text-ink m-0">
+              İlk adımdan itibaren neler olacak
             </h2>
-            <p className="text-lg text-[#33452E] m-0">
-              Terapinin neyi kapsadığını bilmemek, başlı başına bir kaygı kaynağı olabilir.
-              Birlikte tam olarak nasıl çalışacağımız burada.
-            </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
-            {approachSteps.map((step) => (
-              <div key={step.num} className="bg-cream rounded-2xl p-7">
-                <p className="font-serif text-2xl text-terracotta font-semibold mb-3">
-                  {step.num}
-                </p>
-                <h3 className="text-[17.5px] font-semibold text-ink mb-2">{step.title}</h3>
-                <p className="text-[15px] text-[#5B5850] m-0">{step.desc}</p>
+          <div className="flex flex-col">
+            {approachSteps.map((step, i) => (
+              <div key={step.num} className="flex gap-6">
+                <div className="flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full bg-sage-light text-cream font-serif font-semibold flex items-center justify-center flex-shrink-0">
+                    {step.num}
+                  </div>
+                  {i < approachSteps.length - 1 && (
+                    <div className="w-0.5 flex-1 bg-sage-light/35 min-h-8" />
+                  )}
+                </div>
+                <div className="pb-10">
+                  <h3 className="font-serif text-lg font-semibold text-ink mt-1.5 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-base text-body leading-relaxed max-w-[520px] m-0">
+                    {step.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
