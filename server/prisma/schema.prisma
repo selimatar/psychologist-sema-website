@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+// AvailabilityRule and BlockedPeriod live in Sanity now (see ../../sanity/),
+// edited via Sanity Studio. server/src/services/availability.service.js
+// fetches them from there; Booking stays here since it needs Postgres's
+// transactional/unique-constraint guarantees for slot-locking.
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+  CANCELLED
+}
+
+enum BookingSource {
+  CLIENT_REQUEST
+  MANUAL
+}
+
+// Unified table for both client-submitted requests and psychologist-created
+// manual reservations. `lockKey` mirrors `slotStart` while the row is
+// PENDING or APPROVED, and is cleared to null otherwise; the unique index
+// on `lockKey` is what makes slot-holding atomic (see booking.service.js).
+model Booking {
+  id              String        @id @default(uuid())
+  slotStart       DateTime
+  slotEnd         DateTime
+  lockKey         DateTime?     @unique
+  status          BookingStatus @default(PENDING)
+  source          BookingSource
+
+  clientName      String?
+  clientEmail     String?
+  topic           String?
+  notes           String?
+  rejectionReason String?
+
+  expiresAt       DateTime?
+  respondedAt     DateTime?
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([status])
+  @@index([slotStart])
+}

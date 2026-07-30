@@ -1,45 +1,116 @@
 import { useState } from "react";
 import FaqItem from "../components/FaqItem.jsx";
-import { faqs } from "../data/content.tr.js";
+import SlotPicker from "../components/SlotPicker.jsx";
+import { useSanityQuery } from "../lib/useSanityQuery.js";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+// Not Sanity content — this is the default booking-form URL used before the
+// backend responds; the real one (data.googleFormUrl) overwrites it on submit.
+const FALLBACK_GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdH0Wwbe097talQ6YToA1W7gVrRe0p1XKBaQfzihDebDjYx5g/viewform";
+
+const CONTACT_PAGE_QUERY = `*[_type == "contactPage"][0]`;
+const SERVICES_QUERY = `*[_type == "service"] | order(order asc)`;
+
+// Fixed booking-topic taxonomy — mirrors server/src/validators/bookingRequest.validator.js's
+// Zod TOPICS enum exactly. Only each option's display label is Sanity-sourced
+// (via the matching `service` document's title); "unsure" has no service
+// counterpart, so its label is the one piece of this dropdown that's never
+// Sanity content and stays hardcoded.
+const TOPIC_SLUGS = ["anxiety", "stress", "transitions", "grief", "depression", "trauma", "unsure"];
+const UNSURE_TOPIC_LABEL = "Henüz emin değilim";
+
+const emptyForm = { name: "", email: "", topic: "", notes: "" };
 
 // Contact doubles as the booking request form — see the scope note above.
 // Fields cover both "reach out" (Contact) and "request consultation" (Booking)
 // use cases from the prototype without needing two separate forms.
 export default function Contact() {
+  const [form, setForm] = useState(emptyForm);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [slotReloadToken, setSlotReloadToken] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [googleFormUrl, setGoogleFormUrl] = useState(FALLBACK_GOOGLE_FORM_URL);
 
-  function handleSubmit(e) {
+  const { data: content } = useSanityQuery(CONTACT_PAGE_QUERY);
+  const { data: services } = useSanityQuery(SERVICES_QUERY);
+
+  if (!content) return null;
+
+  const faqs = content.faqs ?? [];
+
+  const topicLabels = { unsure: UNSURE_TOPIC_LABEL };
+  for (const s of services ?? []) {
+    if (s.topicValue) topicLabels[s.topicValue] = s.title;
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    // No backend yet — this just flips the confirmation state.
-    // Wire this up to your API/email service when the backend is ready.
-    setSubmitted(true);
+    setSubmitError("");
+
+    if (!selectedSlot) {
+      setSubmitError("Lütfen uygun bir saat seçin.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/booking-requests`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          topic: form.topic || undefined,
+          notes: form.notes || undefined,
+          slotStart: selectedSlot.start,
+          slotEnd: selectedSlot.end,
+        }),
+      });
+
+      if (res.status === 409) {
+        setSubmitError("Seçtiğiniz saat az önce doldu. Lütfen başka bir saat seçin.");
+        setSelectedSlot(null);
+        setSlotReloadToken((t) => t + 1);
+        return;
+      }
+
+      if (!res.ok) {
+        setSubmitError("Talebiniz gönderilirken bir sorun oluştu. Lütfen tekrar deneyin.");
+        return;
+      }
+
+      const data = await res.json();
+      if (data.googleFormUrl) setGoogleFormUrl(data.googleFormUrl);
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Talebiniz gönderilirken bir sorun oluştu. Lütfen tekrar deneyin.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
     <>
       <section className="bg-sand px-6 md:px-8 pt-20 pb-24">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-14 items-start">
           <div>
             <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">
-              Bize Ulaşın
+              {content.eyebrow}
             </p>
             <h1 className="font-serif text-3xl md:text-5xl font-medium text-ink mb-5">
-              İletişime geçmek genellikle en zor kısımdır
+              {content.title}
             </h1>
-            <p className="text-lg text-body mb-7">
-              Aşağıya kısa bir not bırakın, ücretsiz 15 dakikalık görüşmeyi ayarlamak için bir iş
-              günü içinde size dönüş yapacağım — herhangi bir taahhüt yok, sadece doğru olup
-              olmadığını görme fırsatı.
-            </p>
+            <p className="text-lg text-body mb-7">{content.paragraph}</p>
 
             <div className="bg-sand rounded-2xl p-7 mb-5">
-              <h3 className="font-serif text-lg font-semibold mb-4 text-ink">Sırada ne var</h3>
+              <h3 className="font-serif text-lg font-semibold mb-4 text-ink">
+                {content.nextSteps?.heading}
+              </h3>
               <div className="flex flex-col gap-4">
-                {[
-                  "Ücretsiz görüşmeniz için bir zaman onaylamak üzere bir iş günü içinde size dönüş yapacağım.",
-                  "Sizi buraya getiren şey hakkında biraz bilgi alabilmem için yaklaşık 15 dakika konuşacağız.",
-                  "Uygun bir eşleşme gibi hissettirirse, size uygun bir zamanda çevrimiçi olarak ilk tam seansınızı planlayacağız.",
-                ].map((line, i) => (
+                {(content.nextSteps?.steps ?? []).map((line, i) => (
                   <div key={line} className="flex gap-3">
                     <p className="m-0 font-serif font-semibold text-terracotta flex-none w-5">{i + 1}</p>
                     <p className="m-0 text-[15px] text-[#4E4B44]">{line}</p>
@@ -49,11 +120,7 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-4">
-              {[
-                "Sadece güvenli video görüşmesi üzerinden çevrimiçi seanslar.",
-                "Burada paylaştığınız her şey gizlidir ve yalnızca görüşmenizi ayarlamak için kullanılır.",
-                "Özel ödemeli muayenehane — ağ dışı geri ödeme için bir fatura (superbill) sağlanır.",
-              ].map((line) => (
+              {(content.assuranceBullets ?? []).map((line) => (
                 <div key={line} className="flex gap-3 items-start">
                   <span className="w-2 h-2 rounded-full bg-sage-light mt-2 flex-none" />
                   <p className="m-0 text-[15px] text-[#5B5850]">{line}</p>
@@ -66,85 +133,97 @@ export default function Contact() {
             {submitted ? (
               <div className="bg-white rounded-2xl p-11 text-center border border-charcoal/10">
                 <p className="text-4xl mb-3">&#10003;</p>
-                <h3 className="font-serif text-xl mb-2 text-ink">Teşekkür ederim</h3>
+                <h3 className="font-serif text-xl mb-2 text-ink">{content.successState?.heading}</h3>
                 <p className="text-[15.5px] text-[#5B5850] m-0 max-w-xs mx-auto">
-                  Mesajınız alındı. Bir iş günü içinde sizinle iletişime geçeceğim.
+                  {content.successState?.paragraphs?.[0]}
                 </p>
                 <p className="text-[15.5px] text-[#5B5850] mt-4 mb-5 max-w-xs mx-auto">
-                  Rezervasyon onaylandığında size bilgi verilecektir. Şimdi lütfen bilgi formunu
-                  doldurunuz.
+                  {content.successState?.paragraphs?.[1]}
                 </p>
                 <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdH0Wwbe097talQ6YToA1W7gVrRe0p1XKBaQfzihDebDjYx5g/viewform"
+                  href={googleFormUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-terracotta text-white px-8 py-3.5 rounded-full text-[15.5px] font-medium hover:opacity-90 transition-opacity"
                 >
-                  Bilgi Formunu Doldur
+                  {content.successState?.buttonLabel}
                 </a>
               </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="bg-white rounded-2xl p-8 flex flex-col gap-5 border border-charcoal/10"
+                className="bg-white rounded-2xl p-10 flex flex-col gap-6 border border-charcoal/10"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Field label="Adınız">
+                  <Field label={content.formLabels?.nameLabel}>
                     <input
                       type="text"
                       required
-                      placeholder="Adınız"
+                      placeholder={content.formLabels?.nameLabel}
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
                       className="input-field"
                     />
                   </Field>
-                  <Field label="E-posta">
+                  <Field label={content.formLabels?.emailLabel}>
                     <input
                       type="email"
                       required
-                      placeholder="ornek@mail.com"
+                      placeholder={content.formLabels?.emailPlaceholder}
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
                       className="input-field"
                     />
                   </Field>
                 </div>
 
-                <Field label="Hangi konuda destek almak istersiniz?" optional>
-                  <select className="input-field" defaultValue="">
-                    <option value="">Bir alan seçin (isteğe bağlı)</option>
-                    <option value="anxiety">Kaygı</option>
-                    <option value="stress">Stres yönetimi</option>
-                    <option value="transitions">Yaşam geçişleri</option>
-                    <option value="grief">Yas</option>
-                    <option value="depression">Depresyon</option>
-                    <option value="trauma">Travma</option>
-                    <option value="unsure">Henüz emin değilim</option>
+                <Field label={content.formLabels?.topicLabel} optional>
+                  <select
+                    className="input-field"
+                    value={form.topic}
+                    onChange={(e) => setForm({ ...form, topic: e.target.value })}
+                  >
+                    <option value="">{content.formLabels?.topicPlaceholder}</option>
+                    {TOPIC_SLUGS.map((slug) => (
+                      <option key={slug} value={slug}>
+                        {topicLabels[slug]}
+                      </option>
+                    ))}
                   </select>
                 </Field>
 
-                <Field label="Size ulaşmak için en uygun zamanlar" optional>
-                  <input
-                    type="text"
-                    placeholder="örn. hafta içi sabahları"
-                    className="input-field"
+                <Field label={content.formLabels?.slotLabel}>
+                  <SlotPicker
+                    selected={selectedSlot}
+                    onSelect={setSelectedSlot}
+                    reloadToken={slotReloadToken}
                   />
                 </Field>
 
-                <Field label="Bilmemi istediğiniz başka bir şey var mı?" optional>
+                <Field label={content.formLabels?.notesLabel} optional>
                   <textarea
                     rows={4}
-                    placeholder="İstediğiniz kadar az ya da çok paylaşabilirsiniz"
+                    placeholder={content.formLabels?.notesPlaceholder}
+                    value={form.notes}
+                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
                     className="input-field resize-y"
                   />
                 </Field>
 
+                {submitError && (
+                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3 m-0">
+                    {submitError}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="mt-1 bg-terracotta text-white py-4 rounded-full text-base font-medium hover:opacity-90 transition-opacity"
+                  disabled={submitting}
+                  className="mt-1 bg-terracotta text-white py-4 rounded-full text-base font-medium hover:opacity-90 transition-opacity disabled:opacity-60"
                 >
-                  Ücretsiz Görüşme Talep Et
+                  {submitting ? "Gönderiliyor..." : content.formLabels?.submitLabel}
                 </button>
-                <p className="m-0 text-[13px] text-muted text-center">
-                  Ödeme gerekmez. Bu, baskısız bir ilk adımdır.
-                </p>
+                <p className="m-0 text-[13px] text-muted text-center">{content.formLabels?.submitNote}</p>
               </form>
             )}
           </div>
@@ -154,9 +233,11 @@ export default function Contact() {
       {/* FAQ — id targeted by the /contact#faq links elsewhere in the app */}
       <section id="faq" className="max-w-3xl mx-auto px-6 md:px-8 py-24 scroll-mt-24">
         <div className="text-center mb-12">
-          <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">SSS</p>
+          <p className="text-sm tracking-wide uppercase text-sage font-semibold mb-4">
+            {content.faqSection?.eyebrow}
+          </p>
           <h2 className="font-serif text-3xl md:text-4xl font-medium text-ink m-0">
-            Sık sorulan sorular
+            {content.faqSection?.title}
           </h2>
         </div>
         <div className="flex flex-col gap-3.5">
