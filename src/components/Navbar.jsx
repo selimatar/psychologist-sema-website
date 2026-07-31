@@ -1,12 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useSanityQuery } from "../lib/useSanityQuery.js";
 
-const links = [
-  { to: "/", label: "Ana Sayfa" },
-  { to: "/about", label: "Hakkımda" },
-  { to: "/services", label: "Hizmetler" },
-  { to: "/contact", label: "İletişim" },
-];
+const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0]`;
 
 // Active-link styling helper — NavLink gives us isActive for free
 const linkClasses = ({ isActive }) =>
@@ -19,6 +15,13 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const headerRef = useRef(null);
+
+  const { data: settings } = useSanityQuery(SITE_SETTINGS_QUERY);
+  const links = (settings?.navLinks ?? [])
+    .filter((l) => l.path?.trim())
+    .map((l) => ({ to: l.path, label: l.label }));
+  const siteTitle = settings?.siteTitle ?? "";
+  const ctaLabel = settings?.ctaButtonLabel ?? "";
 
   // Reserve space for the fixed header by publishing its live height as a CSS var
   // that Layout uses for top padding — avoids content jumping under the navbar.
@@ -71,7 +74,7 @@ export default function Navbar() {
           className="font-serif text-xl font-semibold text-charcoal tracking-tight"
           onClick={() => setOpen(false)}
         >
-          Psk. Sema Azab
+          {siteTitle}
         </Link>
 
         {/* Desktop nav — hidden below md, hamburger takes over */}
@@ -87,7 +90,7 @@ export default function Navbar() {
           to="/contact"
           className="hidden md:inline-block bg-terracotta text-white px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap shadow-[0_2px_10px_rgba(201,123,92,0.25)] hover:opacity-90 transition-opacity"
         >
-          Randevu Al
+          {ctaLabel}
         </Link>
 
         {/* Hamburger button — pure Tailwind, no icon library */}
@@ -138,7 +141,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-3 bg-terracotta text-white text-center px-5 py-3 rounded-full text-sm font-medium"
           >
-            Randevu Al
+            {ctaLabel}
           </Link>
         </nav>
       )}
