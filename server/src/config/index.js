@@ -30,5 +30,4 @@ module.exports = {
 
   pendingBookingTtlHours: Number(process.env.PENDING_BOOKING_TTL_HOURS || 72),
   minBookingLeadMinutes: Number(process.env.MIN_BOOKING_LEAD_MINUTES || 120),
-  expirySweepCron: process.env.EXPIRY_SWEEP_CRON || '*/15 * * * *',
 };

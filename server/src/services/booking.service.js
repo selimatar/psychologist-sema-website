@@ -151,25 +151,6 @@ async function rescheduleBooking(id, { slotStart, slotEnd }) {
   }
 }
 
-// Sweep job: expire any PENDING booking past its TTL, regardless of slot,
-// and notify the client. Correctness doesn't depend on this running (see
-// expireStaleAtSlot above) — it exists for admin-list hygiene + the email.
-async function expireOverduePendingBookings() {
-  const stale = await prisma.booking.findMany({
-    where: { status: 'PENDING', expiresAt: { lt: new Date() } },
-  });
-
-  for (const booking of stale) {
-    const updated = await prisma.booking.update({
-      where: { id: booking.id },
-      data: { status: 'EXPIRED', lockKey: null },
-    });
-    await emailService.sendExpiredToClient(updated);
-  }
-
-  return stale.length;
-}
-
 function listBookings({ status } = {}) {
   return prisma.booking.findMany({
     where: status ? { status } : undefined,
@@ -185,6 +166,5 @@ module.exports = {
   rejectBooking,
   cancelBooking,
   rescheduleBooking,
-  expireOverduePendingBookings,
   listBookings,
 };

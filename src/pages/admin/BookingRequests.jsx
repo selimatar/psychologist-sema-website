@@ -11,7 +11,6 @@ const STATUS_TABS = [
   { value: "PENDING", label: "Beklemede" },
   { value: "APPROVED", label: "Onaylandı" },
   { value: "REJECTED", label: "Reddedildi" },
-  { value: "EXPIRED", label: "Süresi Doldu" },
   { value: "CANCELLED", label: "İptal Edildi" },
   { value: "", label: "Tümü" },
 ];

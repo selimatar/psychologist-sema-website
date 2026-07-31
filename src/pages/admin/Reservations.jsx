@@ -12,7 +12,6 @@ const STATUS_LABELS = {
   PENDING: "Beklemede",
   APPROVED: "Onaylandı",
   REJECTED: "Reddedildi",
-  EXPIRED: "Süresi Doldu",
   CANCELLED: "İptal Edildi",
 };
 

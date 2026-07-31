@@ -9,7 +9,6 @@ jest.mock('../../src/services/email.service', () => ({
   sendNewRequestToPsychologist: jest.fn(),
   sendApprovedToClient: jest.fn(),
   sendRejectedToClient: jest.fn(),
-  sendExpiredToClient: jest.fn(),
 }));
 
 const maybeDescribe = hasTestDb ? describe : describe.skip;

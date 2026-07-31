@@ -34,9 +34,9 @@ async function sendNewRequestToPsychologist(booking) {
     to: config.psychologistEmail,
     from: config.emailFrom,
     subject: 'Yeni randevu talebi',
-    text: `${booking.clientName} (${booking.clientEmail}) requested ${formatSlot(
+    text: `${booking.clientName} (${booking.clientEmail}) ${formatSlot(
       booking
-    )}.\nTopic: ${booking.topic || '-'}\nNotes: ${booking.notes || '-'}\n\nReview it in the admin panel.`,
+    )} için randevu talep etti.\nKonu: ${booking.topic || '-'}\nNot: ${booking.notes || '-'}\n\nYönetim panelinden inceleyebilirsiniz.`,
   });
 }
 
@@ -46,8 +46,8 @@ async function sendApprovedToClient(booking, googleFormUrl) {
     to: booking.clientEmail,
     from: config.emailFrom,
     subject: 'Randevunuz onaylandı',
-    text: `Your appointment on ${formatSlot(booking)} has been confirmed.${
-      googleFormUrl ? `\n\nIf you haven't already, please complete the intake form: ${googleFormUrl}` : ''
+    text: `${formatSlot(booking)} tarihindeki randevunuz onaylanmıştır.${
+      googleFormUrl ? `\n\nHenüz doldurmadıysanız, lütfen ön görüşme formunu doldurun: ${googleFormUrl}` : ''
     }`,
   });
 }
@@ -58,21 +58,9 @@ async function sendRejectedToClient(booking) {
     to: booking.clientEmail,
     from: config.emailFrom,
     subject: 'Randevu talebiniz hakkında',
-    text: `Unfortunately your requested slot on ${formatSlot(booking)} is not available.${
-      booking.rejectionReason ? `\n\nNote: ${booking.rejectionReason}` : ''
-    }\n\nPlease submit a new request for another time.`,
-  });
-}
-
-async function sendExpiredToClient(booking) {
-  if (!booking.clientEmail) return;
-  await send({
-    to: booking.clientEmail,
-    from: config.emailFrom,
-    subject: 'Randevu talebinizin süresi doldu',
-    text: `Your requested slot on ${formatSlot(
-      booking
-    )} was not confirmed in time and has been released. Please submit a new request if you'd still like to book.`,
+    text: `Maalesef ${formatSlot(booking)} için talep ettiğiniz randevu saati uygun değildir.${
+      booking.rejectionReason ? `\n\nNot: ${booking.rejectionReason}` : ''
+    }\n\nLütfen başka bir zaman için yeni bir talep gönderin.`,
   });
 }
 
@@ -80,5 +68,4 @@ module.exports = {
   sendNewRequestToPsychologist,
   sendApprovedToClient,
   sendRejectedToClient,
-  sendExpiredToClient,
 };
