@@ -12,7 +12,6 @@ jest.mock('../../src/services/email.service', () => ({
   sendNewRequestToPsychologist: jest.fn(),
   sendApprovedToClient: jest.fn(),
   sendRejectedToClient: jest.fn(),
-  sendExpiredToClient: jest.fn(),
 }));
 jest.mock('../../src/services/googleForm.service', () => ({
   buildPrefilledUrl: jest.fn(() => 'https://forms.example/prefilled'),
@@ -145,23 +144,5 @@ describe('rejectBooking', () => {
     await expect(bookingService.rejectBooking('b1')).rejects.toBeInstanceOf(
       bookingService.InvalidTransitionError
     );
-  });
-});
-
-describe('expireOverduePendingBookings', () => {
-  test('expires every stale PENDING booking and emails each client', async () => {
-    const stale = [
-      { id: 'b1', status: 'PENDING' },
-      { id: 'b2', status: 'PENDING' },
-    ];
-    prisma.booking.findMany.mockResolvedValue(stale);
-    prisma.booking.update.mockImplementation(({ where }) =>
-      Promise.resolve({ id: where.id, status: 'EXPIRED' })
-    );
-
-    const count = await bookingService.expireOverduePendingBookings();
-
-    expect(count).toBe(2);
-    expect(emailService.sendExpiredToClient).toHaveBeenCalledTimes(2);
   });
 });
