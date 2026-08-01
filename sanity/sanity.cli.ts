@@ -6,4 +6,7 @@ export default defineCliConfig({
     dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   },
   studioHost: 'sema-psikolog',
+  deployment: {
+    appId: 'wrmv3r91xovgu9mi5e7g880q',
+  },
 });
