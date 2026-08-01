@@ -4,7 +4,7 @@ Marketing site and booking system for an online psychotherapy practice. The repo
 
 ## Stack
 
-- **Frontend** — React 18 + React Router v6, styled entirely with Tailwind CSS, bundled by Vite. All page content is fetched live from Sanity — no hardcoded copy in the frontend.
+- **Frontend** — React 19 + React Router v6, styled entirely with Tailwind CSS, bundled by Vite. All page content is fetched live from Sanity — no hardcoded copy in the frontend.
 - **Backend** (`server/`) — Node + Express + Prisma against PostgreSQL (Supabase), handles booking requests/reservations with race-condition-safe slot locking, JWT-gated admin API, SendGrid email notifications.
 - **CMS** (`sanity/`) — a standalone Sanity Studio. Editable there: all page copy, the services list, nav/footer, and the psychologist's weekly availability + blocked-off time.
 
