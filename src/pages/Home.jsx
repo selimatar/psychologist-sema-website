@@ -50,15 +50,17 @@ export default function Home() {
       </section>
 
       {/* TRUST STRIP */}
-      <section className="max-w-4xl mx-auto px-6 md:px-8 pb-20">
-        <div className="flex flex-wrap justify-center gap-x-9 gap-y-3 border-y border-charcoal/10 py-6">
-          {(content.hero.trustStripItems ?? []).map((item) => (
-            <p key={item} className="m-0 text-[14.5px] text-[#5B5850]">
-              {item}
-            </p>
-          ))}
-        </div>
-      </section>
+      {(content.hero.trustStripItems ?? []).length > 0 && (
+        <section className="max-w-4xl mx-auto px-6 md:px-8 pb-20">
+          <div className="flex flex-wrap justify-center gap-x-9 gap-y-3 border-y border-charcoal/10 py-6">
+            {content.hero.trustStripItems.map((item) => (
+              <p key={item} className="m-0 text-[14.5px] text-[#5B5850]">
+                {item}
+              </p>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ABOUT TEASER */}
       <section className="bg-sand px-6 md:px-8 py-24">
