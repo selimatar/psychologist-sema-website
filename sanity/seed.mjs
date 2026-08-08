@@ -183,7 +183,7 @@ const documents = [
       buttonLabel: 'Bilgi Formunu Doldur',
     },
     formLabels: {
-      nameLabel: 'Adınız',
+      nameLabel: 'Adınız ve Soyadınız',
       emailLabel: 'E-posta',
       emailPlaceholder: 'ornek@mail.com',
       topicLabel: 'Hangi konuda destek almak istersiniz?',
