@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import FaqItem from "../components/FaqItem.jsx";
 import SlotPicker from "../components/SlotPicker.jsx";
 import { useSanityQuery } from "../lib/useSanityQuery.js";
@@ -33,9 +34,34 @@ export default function Contact() {
   const [slotReloadToken, setSlotReloadToken] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [googleFormUrl, setGoogleFormUrl] = useState(FALLBACK_GOOGLE_FORM_URL);
+  const [highlightNextSteps, setHighlightNextSteps] = useState(false);
+  const nextStepsRef = useRef(null);
 
   const { data: content } = useSanityQuery(CONTACT_PAGE_QUERY);
   const { data: services } = useSanityQuery(SERVICES_QUERY);
+  const location = useLocation();
+
+  // React Router doesn't auto-scroll to a URL hash on client-side navigation
+  // (only real page loads do), and the FAQ section only exists once `content`
+  // has loaded, so scroll manually once it's actually in the DOM.
+  useEffect(() => {
+    if (!content || !location.hash) return;
+    const el = document.querySelector(location.hash);
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [content, location.hash]);
+
+  // After a successful submission, the confirmation replaces the form on the
+  // right, but "what happens next" lives in the nextSteps box on the left —
+  // easy to miss (especially on mobile, where it's out of view by the time
+  // someone has scrolled down to the form). Pull it into view and pulse it
+  // once so it actually gets read.
+  useEffect(() => {
+    if (!submitted) return;
+    nextStepsRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setHighlightNextSteps(true);
+    const timer = setTimeout(() => setHighlightNextSteps(false), 2200);
+    return () => clearTimeout(timer);
+  }, [submitted]);
 
   if (!content) return null;
 
@@ -105,7 +131,12 @@ export default function Contact() {
             </h1>
             <p className="text-lg text-body mb-7">{content.paragraph}</p>
 
-            <div className="bg-sand rounded-2xl p-7 mb-5">
+            <div
+              ref={nextStepsRef}
+              className={`bg-sand rounded-2xl p-7 mb-5 scroll-mt-24 ring-terracotta transition-shadow duration-500 ${
+                highlightNextSteps ? "ring-2 ring-offset-2 ring-offset-cream" : "ring-0"
+              }`}
+            >
               <h3 className="font-serif text-lg font-semibold mb-4 text-ink">
                 {content.nextSteps?.heading}
               </h3>
