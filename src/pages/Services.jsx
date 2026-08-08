@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import ServiceCard from "../components/ServiceCard.jsx";
 import CtaBanner from "../components/CtaBanner.jsx";
 import { useSanityQuery } from "../lib/useSanityQuery.js";
+import { useDocumentSeo } from "../lib/useDocumentSeo.js";
 
 const SERVICES_PAGE_QUERY = `*[_type == "servicesPage"][0]`;
 const SERVICES_QUERY = `*[_type == "service"] | order(order asc)`;
@@ -11,6 +12,8 @@ export default function Services() {
   const { data: content } = useSanityQuery(SERVICES_PAGE_QUERY);
   const { data: services } = useSanityQuery(SERVICES_QUERY);
   const location = useLocation();
+
+  useDocumentSeo(content?.seo);
 
   // Same pattern as Contact.jsx's #faq handling: React Router doesn't
   // auto-scroll to a URL hash on client-side navigation, and the

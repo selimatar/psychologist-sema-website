@@ -1,11 +1,14 @@
 import CtaBanner from "../components/CtaBanner.jsx";
 import SanityImage from "../components/SanityImage.jsx";
 import { useSanityQuery } from "../lib/useSanityQuery.js";
+import { useDocumentSeo } from "../lib/useDocumentSeo.js";
 
 const ABOUT_PAGE_QUERY = `*[_type == "aboutPage"][0]`;
 
 export default function About() {
   const { data: content } = useSanityQuery(ABOUT_PAGE_QUERY);
+
+  useDocumentSeo(content?.seo);
 
   if (!content) return null;
 
