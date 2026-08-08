@@ -1,10 +1,12 @@
 const iconStroke = {
   anxiety: "#6E8F63",
   stress: "#B57A54",
+  self_confidence: "#6E8F63",
+  relationships: "#B57A54",
+  overthinking: "#6E8F63",
+  procrastination: "#B57A54",
   transitions: "#6E8F63",
-  grief: "#B57A54",
-  depression: "#6E8F63",
-  trauma: "#B57A54",
+  emotional_regulation: "#B57A54",
 };
 
 function renderIcon(name) {

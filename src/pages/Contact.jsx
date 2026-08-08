@@ -18,7 +18,14 @@ const SERVICES_QUERY = `*[_type == "service"] | order(order asc)`;
 // (via the matching `service` document's title); "unsure" has no service
 // counterpart, so its label is the one piece of this dropdown that's never
 // Sanity content and stays hardcoded.
-const TOPIC_SLUGS = ["anxiety", "stress", "transitions", "grief", "depression", "trauma", "unsure"];
+const topicSlugsFromServices = (services ?? [])
+  .slice()
+  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  .map((s) => s.topicValue)
+  .filter(Boolean);
+
+// include 'unsure' as the last option (explicit)
+const TOPIC_SLUGS = [...new Set(topicSlugsFromServices), "unsure"];
 const UNSURE_TOPIC_LABEL = "Henüz emin değilim";
 
 const emptyForm = { name: "", email: "", topic: "", notes: "" };
