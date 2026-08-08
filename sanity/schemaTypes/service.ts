@@ -1,14 +1,14 @@
 import { defineField, defineType } from 'sanity';
 
 const TOPIC_OPTIONS = [
-  { title: 'Stres', value: 'stress' },
-  { title: 'Aşırı Düşünme', value: 'overthinking' },
-  { title: 'İlişki Problemleri', value: 'relationships' },
-  { title: 'Yaşam Geçişleri', value: 'transitions' },
-  { title: 'Erteleme', value: 'procrastination' },
-  { title: 'Duygu Düzenleme', value: 'emotional_regulation' },
   { title: 'Kaygı', value: 'anxiety' },
+  { title: 'Stres', value: 'stress' },
   { title: 'Özgüven', value: 'self_confidence' },
+  { title: 'İlişki Problemleri', value: 'relationships' },
+  { title: 'Aşırı Düşünme', value: 'overthinking' },
+  { title: 'Erteleme', value: 'procrastination' },
+  { title: 'Yaşam Geçişleri', value: 'transitions' },
+  { title: 'Duygu Düzenleme', value: 'emotional_regulation' },
 ];
 
 export default defineType({
