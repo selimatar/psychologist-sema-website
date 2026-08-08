@@ -3,6 +3,7 @@ import ServiceCard from "../components/ServiceCard.jsx";
 import CtaBanner from "../components/CtaBanner.jsx";
 import SanityImage from "../components/SanityImage.jsx";
 import { useSanityQuery } from "../lib/useSanityQuery.js";
+import { useDocumentSeo } from "../lib/useDocumentSeo.js";
 
 const HOME_PAGE_QUERY = `*[_type == "homePage"][0]`;
 const SERVICES_QUERY = `*[_type == "service"] | order(order asc)`;
@@ -10,6 +11,8 @@ const SERVICES_QUERY = `*[_type == "service"] | order(order asc)`;
 export default function Home() {
   const { data: content } = useSanityQuery(HOME_PAGE_QUERY);
   const { data: services } = useSanityQuery(SERVICES_QUERY);
+
+  useDocumentSeo(content?.seo);
 
   if (!content) return null;
 

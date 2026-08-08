@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import FaqItem from "../components/FaqItem.jsx";
 import SlotPicker from "../components/SlotPicker.jsx";
 import { useSanityQuery } from "../lib/useSanityQuery.js";
+import { useDocumentSeo } from "../lib/useDocumentSeo.js";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 // Not Sanity content — this is the default booking-form URL used before the
@@ -50,6 +51,8 @@ export default function Contact() {
   const { data: content } = useSanityQuery(CONTACT_PAGE_QUERY);
   const { data: services } = useSanityQuery(SERVICES_QUERY);
   const location = useLocation();
+
+  useDocumentSeo(content?.seo);
 
   // React Router doesn't auto-scroll to a URL hash on client-side navigation
   // (only real page loads do), and the FAQ section only exists once `content`
