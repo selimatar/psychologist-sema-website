@@ -20,10 +20,12 @@ const PAGE_SIZE = 10;
 const TOPIC_LABELS = {
   anxiety: "Kaygı",
   stress: "Stres yönetimi",
+  self_confidence: "Özgüven",
+  relationships: "İlişki problemleri",
+  overthinking: "Aşırı düşünme",
+  procrastination: "Erteleme",
   transitions: "Yaşam geçişleri",
-  grief: "Yas",
-  depression: "Depresyon",
-  trauma: "Travma",
+  emotional_regulation: "Duygu düzenleme",
   unsure: "Henüz emin değil",
 };
 

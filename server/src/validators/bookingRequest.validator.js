@@ -1,6 +1,16 @@
 const { z } = require('zod');
 
-const TOPICS = ['anxiety', 'stress', 'transitions', 'grief', 'depression', 'trauma', 'unsure'];
+const TOPICS = [
+  'anxiety',
+  'stress',
+  'self_confidence',
+  'relationships',
+  'overthinking',
+  'procrastination',
+  'transitions',
+  'emotional_regulation',
+  'unsure',
+];
 
 const createBookingRequestSchema = z
   .object({
