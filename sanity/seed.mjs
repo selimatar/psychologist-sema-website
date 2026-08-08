@@ -65,7 +65,7 @@ const documents = [
       primaryButtonLabel: 'Ücretsiz Görüşme Talep Et',
       primaryButtonPath: '/contact',
       secondaryButtonLabel: 'Seanslar nasıl işliyor',
-      secondaryButtonPath: '/services',
+      secondaryButtonPath: '/services#how-it-works',
       trustStripItems: [
         'Lisanslı Klinik Psikolog',
         '12+ Yıllık Deneyim',

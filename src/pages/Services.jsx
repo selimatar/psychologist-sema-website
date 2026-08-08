@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ServiceCard from "../components/ServiceCard.jsx";
 import CtaBanner from "../components/CtaBanner.jsx";
 import { useSanityQuery } from "../lib/useSanityQuery.js";
@@ -8,6 +10,16 @@ const SERVICES_QUERY = `*[_type == "service"] | order(order asc)`;
 export default function Services() {
   const { data: content } = useSanityQuery(SERVICES_PAGE_QUERY);
   const { data: services } = useSanityQuery(SERVICES_QUERY);
+  const location = useLocation();
+
+  // Same pattern as Contact.jsx's #faq handling: React Router doesn't
+  // auto-scroll to a URL hash on client-side navigation, and the
+  // howItWorks section only exists once `content` has loaded.
+  useEffect(() => {
+    if (!content || !location.hash) return;
+    const el = document.querySelector(location.hash);
+    el?.scrollIntoView({ behavior: "smooth" });
+  }, [content, location.hash]);
 
   if (!content) return null;
 
@@ -35,7 +47,8 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="bg-sage-light/10 px-6 py-[88px]">
+      {/* id targeted by the Home hero's secondary button (/services#how-it-works) */}
+      <section id="how-it-works" className="bg-sage-light/10 px-6 py-[88px] scroll-mt-24">
         <div className="max-w-[820px] mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm tracking-wide uppercase text-muted font-semibold mb-3.5">

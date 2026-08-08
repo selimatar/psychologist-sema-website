@@ -130,12 +130,7 @@ export default function Contact() {
             </h1>
             <p className="text-lg text-body mb-7">{content.paragraph}</p>
 
-            <div
-              ref={nextStepsRef}
-              className={`bg-sand rounded-2xl p-7 mb-5 scroll-mt-24 ring-terracotta transition-shadow duration-500 ${
-                highlightNextSteps ? "ring-2 ring-offset-2 ring-offset-cream" : "ring-0"
-              }`}
-            >
+            <div className="bg-sand rounded-2xl p-7 mb-5">
               <h3 className="font-serif text-lg font-semibold mb-4 text-ink">
                 {content.nextSteps?.heading}
               </h3>
