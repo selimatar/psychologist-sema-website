@@ -34,8 +34,8 @@ export default function Contact() {
   const [slotReloadToken, setSlotReloadToken] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [googleFormUrl, setGoogleFormUrl] = useState(FALLBACK_GOOGLE_FORM_URL);
-  const [highlightNextSteps, setHighlightNextSteps] = useState(false);
-  const nextStepsRef = useRef(null);
+  const [highlightSuccess, setHighlightSuccess] = useState(false);
+  const successStateRef = useRef(null);
 
   const { data: content } = useSanityQuery(CONTACT_PAGE_QUERY);
   const { data: services } = useSanityQuery(SERVICES_QUERY);
@@ -50,16 +50,15 @@ export default function Contact() {
     el?.scrollIntoView({ behavior: "smooth" });
   }, [content, location.hash]);
 
-  // After a successful submission, the confirmation replaces the form on the
-  // right, but "what happens next" lives in the nextSteps box on the left —
-  // easy to miss (especially on mobile, where it's out of view by the time
-  // someone has scrolled down to the form). Pull it into view and pulse it
-  // once so it actually gets read.
+  // After a successful submission, the confirmation box replaces the form —
+  // easy to miss if the user was scrolled somewhere else on the page (e.g.
+  // mobile, where the two columns stack). Pull it into view and pulse it
+  // once so the success message and next-steps CTA actually get read.
   useEffect(() => {
     if (!submitted) return;
-    nextStepsRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setHighlightNextSteps(true);
-    const timer = setTimeout(() => setHighlightNextSteps(false), 2200);
+    successStateRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setHighlightSuccess(true);
+    const timer = setTimeout(() => setHighlightSuccess(false), 2200);
     return () => clearTimeout(timer);
   }, [submitted]);
 
@@ -162,7 +161,12 @@ export default function Contact() {
 
           <div>
             {submitted ? (
-              <div className="bg-white rounded-2xl p-11 text-center border border-charcoal/10">
+              <div
+                ref={successStateRef}
+                className={`bg-white rounded-2xl p-11 text-center border border-charcoal/10 scroll-mt-24 ring-terracotta transition-shadow duration-500 ${
+                  highlightSuccess ? "ring-2 ring-offset-2 ring-offset-sand" : "ring-0"
+                }`}
+              >
                 <p className="text-4xl mb-3">&#10003;</p>
                 <h3 className="font-serif text-xl mb-2 text-ink">{content.successState?.heading}</h3>
                 <p className="text-[15.5px] text-[#5B5850] m-0 max-w-xs mx-auto">
