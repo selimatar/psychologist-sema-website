@@ -66,14 +66,14 @@ const tintClassMap = {
   terracotta: "bg-[#F3E7DE]",
 };
 
-export default function ServiceCard({ title, desc, tint, icon }) {
+export default function ServiceCard({ title, description, tint, icon }) {
   return (
     <div className="bg-white rounded-2xl p-7 border border-charcoal/[0.07]">
       <div className={`w-11 h-11 rounded-xl mb-5 flex items-center justify-center ${tintClassMap[tint] ?? tint}`}>
         {renderIcon(icon)}
       </div>
       <h3 className="font-serif text-xl font-semibold mb-2 text-ink">{title}</h3>
-      <p className="text-[15.5px] text-[#5B5850] m-0">{desc}</p>
+      <p className="text-[15.5px] text-[#5B5850] m-0">{description}</p>
     </div>
   );
 }
