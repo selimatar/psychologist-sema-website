@@ -58,6 +58,40 @@ function renderIcon(name) {
           <path d="M12 3l2 6 6 1-4.5 4.5L17 21l-5-3-5 3 1.5-6.5L4 10l6-1z" />
         </svg>
       );
+    case "self_confidence":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="7" />
+          <path d="M9 13l3-3 3 3" />
+        </svg>
+      );
+    case "relationships":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="9" cy="12" r="6" />
+          <circle cx="15" cy="12" r="6" />
+        </svg>
+      );
+    case "overthinking":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 5a7 7 0 1 1-4.95 2.05" />
+          <path d="M7 4v3h3" />
+        </svg>
+      );
+    case "procrastination":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="7" />
+          <path d="M12 8v4l3 2" />
+        </svg>
+      );
+    case "emotional_regulation":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 12h3l2-5 3 10 2-5h6" />
+        </svg>
+      );
     default:
       return null;
   }
