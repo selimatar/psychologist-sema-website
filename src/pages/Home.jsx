@@ -33,7 +33,7 @@ export default function Home() {
               {content.hero.primaryButtonLabel}
             </Link>
             <Link
-              to={content.hero.secondaryButtonPath || "/services"}
+              to={content.hero.secondaryButtonPath || "/services#how-it-works"}
               className="px-7 py-4 rounded-full text-base font-medium border border-charcoal/20 hover:border-charcoal/40 transition-colors"
             >
               {content.hero.secondaryButtonLabel}
