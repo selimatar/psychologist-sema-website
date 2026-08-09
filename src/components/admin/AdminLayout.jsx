@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { clearToken } from "../../lib/adminApi.js";
 
 const navLinkClass = ({ isActive }) =>
@@ -40,6 +41,7 @@ export default function AdminLayout() {
       <main className="max-w-5xl mx-auto px-6 md:px-8 py-10">
         <Outlet />
       </main>
+      <Analytics />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { login, setToken } from "../../lib/adminApi.js";
 
 export default function AdminLogin() {
@@ -69,6 +70,7 @@ export default function AdminLogin() {
           {loading ? "Giriş yapılıyor..." : "Giriş Yap"}
         </button>
       </form>
+      <Analytics />
     </div>
   );
 }
