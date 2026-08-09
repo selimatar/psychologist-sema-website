@@ -10,7 +10,10 @@ function required(name, fallback) {
 
 module.exports = {
   port: Number(process.env.PORT || 4000),
-  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  corsOrigin: (process.env.CORS_ORIGIN || 'http://localhost:5173')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   timezone: process.env.TIMEZONE || 'Europe/Istanbul',
 
   jwtSecret: required('JWT_SECRET'),
