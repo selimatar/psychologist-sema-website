@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import CookieBanner from "./CookieBanner.jsx";
@@ -12,6 +13,7 @@ export default function Layout() {
       </div>
       <Footer />
       <CookieBanner />
+      <Analytics />
     </div>
   );
 }
