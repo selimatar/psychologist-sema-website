@@ -19,6 +19,11 @@ async function login(email, password) {
   const valid = await bcrypt.compare(password, user.passwordHash);
   if (!valid) throw new InvalidCredentialsError();
 
+  await prisma.adminUser.update({
+    where: { id: user.id },
+    data: { lastLoginAt: new Date() },
+  });
+
   const accessToken = jwt.sign({ sub: user.id, email: user.email }, config.jwtSecret, {
     expiresIn: config.jwtExpiresIn,
   });
